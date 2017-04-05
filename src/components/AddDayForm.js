@@ -16,10 +16,20 @@ const tahoeResorts = [
 ]
 
 class AutoComplete extends Component {
+  get value() {
+    return this.refs.inputResort.value
+  }
+
+  set value(inputValue) {
+    this.refs.inputResort.value = inputValue
+  }
   render () {
     return (
       <div>
-        <input type='text' list='tahoe-resorts' />
+        <input ref='inputResort' type='text' list='tahoe-resorts'/>
+        <datalist id='tahoe-resorts'>
+          {this.props.options.map((opt,i) => <option key={i}>{opt}</option> )}
+        </datalist>
       </div>
     )
   }
@@ -47,9 +57,9 @@ let _resort, _date, _powder, _backcountry
   }
 
   return (
-    <form onSubmit={submit} className='add-day'>
+    <form onSubmit={submit} className='add-day-form'>
         <label htmlFor='resort'>Resort Name</label>
-        <input id='resort' type='text' required defaultValue={resort} ref={input => _resort=input} />
+        <AutoComplete options={tahoeResorts} ref={input => _resort=input} />
         <label htmlFor='date'>Date</label>
         <input id='date' type='date' required defaultValue={date} ref={input => _date=input} />
         <div>
