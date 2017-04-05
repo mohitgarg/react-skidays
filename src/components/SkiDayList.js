@@ -2,6 +2,7 @@ import Terrian from 'react-icons/lib/md/terrain'
 import SnowFlake from 'react-icons/lib/ti/weather-snow'
 import Calendar from 'react-icons/lib/fa/calendar'
 import SkiDayRow from './SkiDayRow'
+import { PropTypes } from 'react'
 
 const SkiDayList = ({days}) => (
     <table>
@@ -18,5 +19,10 @@ const SkiDayList = ({days}) => (
       </tbody>
     </table>
 )
+ SkiDayList.propTypes = {
+   days: (props) =>((!Array.isArray(props.days)) ? new Error('It Should be an Array with atleast one Object') :
+   (!props.days.length) ? new Error('It Should be an Array with atleast one Object') : null
+)
+}
 
 export default SkiDayList
